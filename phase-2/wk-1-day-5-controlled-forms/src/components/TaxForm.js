@@ -1,43 +1,87 @@
 import React, { useState } from 'react'
+import { SWEARWORDS } from '../data'
+
+
+// STATIC VARIABLES
+const defaultForm = {
+  'income': "50000",
+  'taxBracket': "middle",
+  'comments': "a comment"
+}
+
 
 function TaxForm(props) {
-
-  const defaultForm = {
-    'income': "50000",
-    'tax-bracket': "middle",
-    'comments': "a comment"
-  }
-
+  // STATE and DERIVED VARIABLES
   const [formData, setFormData] = useState(defaultForm);
+  const { income, taxBracket, comments } = formData;
 
-  const resetForm = () => setFormData(defaultForm);
-
-  function onFormChange({ target: { name, value } }) {
-    setFormData({ ...formData, [name]: value });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    alert(`You owe $${getOwedTaxes()} this year! Thank you for paying your taxes!`);
-    console.log('Form is being submitted!')
-    resetForm();
-  }
-
-  function getOwedTaxes() {
-    switch (formData['tax-bracket']) {
-      case 'low':
-        return 0.5 * formData.income;
-      case 'middle':
-        return 0.2 * formData.income;
-      case 'high':
-        return 0.01 * formData.income;
+  const getSuggestedBracket = () => {
+    switch (true) {
+      case income <= 30000: return "Service Drone";
+      case income > 30000 && income < 100000: return "Middle Class American";
+      case income >= 100000: return "Been to Space";
       default:
-        console.error('tax bracket not found');
-        return 0;
+        alert('failed to suggest tax bracket');
+        return "[bracket not found]";
     }
   }
 
 
+  // FORM SUBMISSION
+  const getOwedTaxes = () => {
+    switch (taxBracket) {
+      case 'low': return 0.5 * income;
+      case 'middle': return 0.2 * income;
+      case 'high': return 0.01 * income;
+      default:
+        alert('tax bracket not found');
+        return 0;
+    }
+  }
+
+  const resetForm = () => setFormData(defaultForm);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`You owe $${getOwedTaxes()} this year! Thank you for paying your taxes!`);
+    resetForm();
+  }
+
+
+  // FORM CHANGE
+  const validateTaxBracket = (formObj) => {
+    if (formObj.taxBracket === "high" && formObj.income < 100000) {
+      formObj.taxBracket = "middle";
+    }
+    if (formObj.taxBracket === "middle" && formObj.income < 30000) {
+      formObj.taxBracket = "low";
+    }
+    return formObj.taxBracket;
+  }
+
+  const censorComments = (comments) => {
+    const commentWords = comments.split(" ");
+    const censoredWords = commentWords.map( word => {
+      return SWEARWORDS.includes(word.toLowerCase()) ? word.replace(/./g, "*") : word;
+    })
+    const censoredComments = censoredWords.join(" ");
+    return censoredComments
+  }
+
+  const validateFormData = (formObj) => {
+    formObj.taxBracket = validateTaxBracket(formObj);
+    formObj.comments = censorComments(formObj.comments);
+    return formObj;
+  }
+  
+  const onFormChange = ({ target: { name, value } }) => {
+    const updatedFormData = { ...formData, [name]: value };
+    const validatedFormData = validateFormData(updatedFormData);
+    setFormData(validatedFormData);
+  }
+
+
+  // COMPONENT RETURN
   return (
 
     <>
@@ -45,20 +89,20 @@ function TaxForm(props) {
     <form onSubmit={handleSubmit}>
 
       <label name="income">How much did you make last year?</label>
-      <input type="number" name="income" value={formData.income} onChange={onFormChange} />
+      <input type="number" name="income" value={income} onChange={onFormChange} />
 
-      <p>Based on your income, we'd suggest a tax bracket of <span>Service Drone</span></p>
+      <p>Based on your income, we'd suggest a tax bracket of <span>{getSuggestedBracket()}</span></p>
 
-      <label htmlFor="tax-bracket">What is your tax bracket?</label>
+      <label htmlFor="taxBracket">What is your tax bracket?</label>
 
-      <select name="tax-bracket" value={formData['tax-bracket']} onChange={onFormChange}>
+      <select name="taxBracket" value={taxBracket} onChange={onFormChange}>
         <option value="low">Service Drone</option>
         <option value="middle">Middle Class American</option>
         <option value="high">Been to Space</option>
       </select>
 
       <label htmlFor="comments">We value your feedback! Write a comment: </label>
-      <textarea name="comments" value={formData.comments} onChange={onFormChange} />
+      <textarea name="comments" value={comments} onChange={onFormChange} />
 
       <input type="submit" value="Submit Taxes" />
 

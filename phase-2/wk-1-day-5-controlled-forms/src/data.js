@@ -1,0 +1,1 @@
+export const SWEARWORDS = ['fuck', 'damn', 'shit', 'cunt', 'fucking', 'bullshit', 'asshole'];

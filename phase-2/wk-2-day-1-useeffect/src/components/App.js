@@ -1,8 +1,17 @@
 import RandomDadJoke from "./RandomDadJoke"
 import FavoriteDadJokesDisplay from "./FavoriteDadJokesDisplay"
 import RandomImage from "./RandomImage"
+import { useState } from 'react'
 
 function App() {
+  const [savedJokes, setSavedJokes] = useState([]);
+
+function addSavedJoke(joke) {
+  console.log('addSavedJokeCalled')
+
+  setSavedJokes(savedJokes => [...savedJokes, joke]);
+}
+
   return (
     <div className="App">
 
@@ -10,11 +19,11 @@ function App() {
 
       <div className="grid column-3">
 
-        <RandomDadJoke />
+        <RandomDadJoke onSaveJoke={addSavedJoke} />
 
         <RandomImage />
 
-        <FavoriteDadJokesDisplay />
+        <FavoriteDadJokesDisplay favoriteJokes={savedJokes}/>
 
       </div>
 

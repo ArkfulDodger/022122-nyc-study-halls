@@ -1,22 +1,36 @@
 import { useState, useEffect } from 'react'
 
-function RandomDadJoke(props) {
+function RandomDadJoke({ onSaveJoke }) {
 
   const [currentJoke, setCurrentJoke] = useState({})
   const [numberOfJokesFetched, setNumberOfJokesFetched] = useState(0)
 
+  // fetch joke on page load
+  useEffect(() => {
+      fetchJoke();
+  }, [])
+
+  // Increment Joke Count when currentJoke state changes
+  useEffect(() => {
+    if (currentJoke.joke) {
+      setNumberOfJokesFetched((numberOfJokesFetched) => ++numberOfJokesFetched)
+    }
+  }, [currentJoke])
+
   function fetchJoke() {
     fetch('https://icanhazdadjoke.com/', {headers: {'Accept': 'application/json'}})
     .then(res => res.json())
-    .then(console.log)
+    .then(data => setCurrentJoke(data))
   }
 
   function handleFetchNewJoke() {
-    console.log('do something here...')
+    fetchJoke();
   }
 
   function saveCurrentJoke() {
-    console.log('use this to save the current joke to an array of favorite jokes!')
+    console.log(currentJoke);
+    onSaveJoke(currentJoke);
+    fetchJoke();
   }
 
   return (

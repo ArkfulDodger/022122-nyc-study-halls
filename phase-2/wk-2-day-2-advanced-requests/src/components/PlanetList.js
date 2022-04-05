@@ -17,11 +17,11 @@ function PlanetList({planets, setDisplayPlanetId}) {
 
     // map through planets and display them in child components
     const renderedPlanets = filteredPlanets.map(planet => (
-      <PlanetListItem
-        key={planet}
-        planet={planet}
-        setDisplayPlanetId={setDisplayPlanetId}
-      />
+        <PlanetListItem
+            key={planet.id}
+            planet={planet}
+            setDisplayPlanetId={setDisplayPlanetId}
+        />
     ))
 
     function handleChange(e) {

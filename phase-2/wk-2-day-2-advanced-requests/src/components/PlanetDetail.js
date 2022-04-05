@@ -1,18 +1,32 @@
 import { useState, useEffect } from 'react'
 
-function PlanetDetail({planetId}) {
+function PlanetDetail({planetId, removePlanet}) {
 
     const [planet, setPlanet] = useState({})
 
     // write something here to get the planet details based on the planetId...
     // you might want to use a useEffect...
+    useEffect(() => {
+        fetch(`http://localhost:3001/planets/${planetId}`)
+            .then( res => res.json())
+            .then( data => setPlanet(data))
+            .catch( error => console.log(error.message));
+    }, [planetId])
 
     function togglePlanetStatus() {
         // write something here to make the change persist...
     }
 
     function handleDelete() {
-        // write something here to persist the delete...
+        fetch(`http://localhost:3001/planets/${planetId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            }
+        })
+            .then( res => res.ok ? removePlanet(planet) : alert('something went wrong...'))
+            .catch(alert('something went wrong'))
     }
 
     return (

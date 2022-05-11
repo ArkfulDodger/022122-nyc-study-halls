@@ -79,3 +79,13 @@ img {
   0% {transform: translateX(110vw)}
   100% {transform: translateX(0)}
 }
+
+a {
+  color: white;
+  margin: 1em;
+}
+
+.four-oh-four {
+  width: 100%;
+  height: auto;
+}

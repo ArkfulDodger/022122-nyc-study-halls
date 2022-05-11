@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+body {
+  margin: 0;
+  font-family: 'Noto Serif', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.card {
+  border: solid black 5px;
+  border-radius: 2em;
+  overflow: hidden;
+}
+
+.card img {
+  width: 200px;
+  /* border-radius: 2em; */
+}
+
+.card button {
+  border: none;
+  background: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1em;
+}

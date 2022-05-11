@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+<<<<<<< HEAD
 function PlanetDetail({planetId, removePlanet}) {
 
     const [planet, setPlanet] = useState({})
@@ -12,12 +13,24 @@ function PlanetDetail({planetId, removePlanet}) {
             .then( data => setPlanet(data))
             .catch( error => console.log(error.message));
     }, [planetId])
+=======
+function PlanetDetail({displayPlanetId, removePlanet}) {
+
+    const [planet, setPlanet] = useState({})
+
+    useEffect(() => {
+        fetch(`http://localhost:3001/planets/${displayPlanetId}`)
+        .then(res => res.json())
+        .then(data => setPlanet(data))
+    }, [displayPlanetId])
+>>>>>>> upstream/main
 
     function togglePlanetStatus() {
         // write something here to make the change persist...
     }
 
     function handleDelete() {
+<<<<<<< HEAD
         fetch(`http://localhost:3001/planets/${planetId}`, {
             method: "DELETE",
             headers: {
@@ -27,6 +40,20 @@ function PlanetDetail({planetId, removePlanet}) {
         })
             .then( res => res.ok ? removePlanet(planet) : alert('something went wrong...'))
             .catch(alert('something went wrong'))
+=======
+        // DELETE REQUEST
+        fetch(`http://localhost:3001/planets/${displayPlanetId}`, {
+            method: 'DELETE'
+        })
+        .then(res => {
+            if (res.ok) {
+                removePlanet(planet)
+            } else {
+                alert('Something went wrong...')
+            }
+        })
+        .catch(err => alert('Something went wrong...'))
+>>>>>>> upstream/main
     }
 
     return (

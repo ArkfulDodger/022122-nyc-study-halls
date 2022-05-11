@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import RandomDadJoke from "./RandomDadJoke"
 import FavoriteDadJokesDisplay from "./FavoriteDadJokesDisplay"
 import RandomImage from "./RandomImage"
 import { useState } from 'react'
 
 function App() {
+<<<<<<< HEAD
   const [savedJokes, setSavedJokes] = useState([]);
 
 function addSavedJoke(joke) {
@@ -11,6 +13,10 @@ function addSavedJoke(joke) {
 
   setSavedJokes(savedJokes => [...savedJokes, joke]);
 }
+=======
+
+  const [imgOpen, setImgOpen] = useState(true)
+>>>>>>> upstream/main
 
   return (
     <div className="App">
@@ -21,7 +27,15 @@ function addSavedJoke(joke) {
 
         <RandomDadJoke onSaveJoke={addSavedJoke} />
 
-        <RandomImage />
+        <div>
+
+          {imgOpen ? <RandomImage /> : null}
+
+          <br/>
+        
+          <button onClick={() => setImgOpen(isOpen => !isOpen)}>{imgOpen ? 'Close' : 'Open'} Image</button>
+
+        </div>
 
         <FavoriteDadJokesDisplay favoriteJokes={savedJokes}/>
 

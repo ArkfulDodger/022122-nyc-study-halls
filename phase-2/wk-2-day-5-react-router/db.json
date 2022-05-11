@@ -110,6 +110,54 @@
       "fun_fact": "Planet 9 might be as far as 800au from the sun although some models put it around 400",
       "orbital_period_in_earth_days": 3613500,
       "is_planet": true
+<<<<<<< HEAD
+    },
+    {
+      "name": "Titan",
+      "orbital_period_in_earth_days": "2",
+      "fun_fact": "Titan oves very fast and is full of cats??? And very small. They're space cats. They have lots of cat furniture. It's also where doctor strange fought thanos. And it's a jupiter moon. And it exploded.",
+      "is_planet": false,
+      "id": 12
+    },
+    {
+      "name": "Kevs Bottle",
+      "orbital_period_in_earth_days": "7000",
+      "fun_fact": "Kev uses it all the time, it's black, he can swing it like this. Contains liquid water which is very significant in SPACE. He plans on giving the cats drinking water on Titan.",
+      "is_planet": true,
+      "id": 13
+    },
+    {
+      "name": "Sad Planet",
+      "orbital_period_in_earth_days": "-1",
+      "fun_fact": "It's blue",
+      "is_planet": false,
+      "id": 14
+    },
+    {
+      "name": "something",
+      "orbital_period_in_earth_days": "2",
+      "fun_fact": "this is something",
+      "is_planet": false,
+      "id": 15
+    },
+    {
+      "name": "Galloway",
+      "orbital_period_in_earth_days": "5000",
+      "fun_fact": "Just another planet. Totally real.",
+      "is_planet": true,
+      "id": 16
+    },
+    {
+      "name": "Wigtownshire",
+      "orbital_period_in_earth_days": "1000",
+      "fun_fact": "Full of wigs",
+      "is_planet": false,
+      "id": 17
     }
   ]
 }
+=======
+    }
+  ]
+}
+>>>>>>> main

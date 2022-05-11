@@ -1,0 +1,11 @@
+#!/usr/share/rvm/rubies/ruby-2.7.4/bin/ruby
+
+require 'pry'
+
+require_relative '../config/env.rb'
+
+system('clear')
+
+App.new.run
+
+# binding.pry

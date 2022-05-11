@@ -1,32 +1,16 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 function PlanetDetail({planetId, handleRemovePlanet}) {
 
+    const { planetName } = useParams()
     const [planet, setPlanet] = useState({})
 
     useEffect(() => {
-      fetch(`http://localhost:3001/planets/${planetId}`)
+      fetch(`http://localhost:3001/planets?name=${planetName}`)
       .then(res => res.json())
-      .then(setPlanet)
+      .then(data => setPlanet(data[0] || {}))
     }, [planetId])
-
-    function togglePlanetStatus() {
-      fetch(`http://localhost:3001/planets/${planetId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accepts': 'application/json'
-        },
-        body: JSON.stringify({is_planet: !planet.is_planet})
-      })
-      setPlanet(planet => ({...planet, is_planet: !planet.is_planet}))
-    }
-
-    function handleDelete() {
-      fetch(`http://localhost:3001/planets/${planetId}`, { method: 'DELETE' })
-      setPlanet({})
-      handleRemovePlanet(planetId)
-    }
 
     return (
         <div className="white-border">
@@ -38,10 +22,6 @@ function PlanetDetail({planetId, handleRemovePlanet}) {
             <p>Fun fact: {planet.fun_fact || "_______________"}</p>
 
             <p>Is a planet: {planet.is_planet ? "Yes": "No"}</p>
-
-            <button onClick={togglePlanetStatus}>Change Planet Status</button>
-
-            <button onClick={handleDelete}>Delete Planet</button>
 
         </div>
     )

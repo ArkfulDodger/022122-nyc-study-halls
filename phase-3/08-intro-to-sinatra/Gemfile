@@ -1,0 +1,23 @@
+source "https://rubygems.org"
+
+gem "activerecord", "~> 6.1"
+
+gem "sinatra-activerecord"
+
+gem "rake"
+
+gem "sqlite3"
+
+gem "require_all"
+
+# our only really new gem is sinatra...
+gem "sinatra"
+
+group :development do
+  gem "faker"
+
+  # rerun will watch for changes in the code and reload the server when it notices any
+  gem "rerun"
+
+  gem "pry"
+end

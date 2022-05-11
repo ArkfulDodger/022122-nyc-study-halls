@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function PlanetForm({handleAddPlanet}) {
+
+    const navigate = useNavigate()
 
     const [planetInputs, setPlanetInputs] = useState({
       name: '',
@@ -12,6 +15,7 @@ function PlanetForm({handleAddPlanet}) {
     function handleSubmit(e) {
       e.preventDefault()
       handleAddPlanet(planetInputs)
+      .then(() => navigate(`/planet-detail/${planetInputs.name}`))
     }
 
     function handleChange(e) {

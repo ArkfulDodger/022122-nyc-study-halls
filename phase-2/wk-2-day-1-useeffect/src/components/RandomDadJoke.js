@@ -5,6 +5,7 @@ function RandomDadJoke({ onSaveJoke }) {
   const [currentJoke, setCurrentJoke] = useState({})
   const [numberOfJokesFetched, setNumberOfJokesFetched] = useState(0)
 
+<<<<<<< HEAD
   // fetch joke on page load
   useEffect(() => {
       fetchJoke();
@@ -15,16 +16,36 @@ function RandomDadJoke({ onSaveJoke }) {
     if (currentJoke.joke) {
       setNumberOfJokesFetched((numberOfJokesFetched) => ++numberOfJokesFetched)
     }
+=======
+  useEffect(() => {
+    fetchJoke()
+  }, [])
+
+  useEffect(() => {
+
+    if (currentJoke.joke) {
+      setNumberOfJokesFetched(prev => prev + 1)
+    }
+
+>>>>>>> upstream/main
   }, [currentJoke])
 
   function fetchJoke() {
     fetch('https://icanhazdadjoke.com/', {headers: {'Accept': 'application/json'}})
     .then(res => res.json())
+<<<<<<< HEAD
     .then(data => setCurrentJoke(data))
   }
 
   function handleFetchNewJoke() {
     fetchJoke();
+=======
+    .then(fetchedJoke => setCurrentJoke(fetchedJoke))
+  }
+
+  function handleFetchNewJoke() {
+    fetchJoke()
+>>>>>>> upstream/main
   }
 
   function saveCurrentJoke() {
